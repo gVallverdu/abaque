@@ -6,11 +6,26 @@ body {
     color: rgb(50, 50, 50);
 }
 
-@media (max-width: 700px) {
-    #body {
-        width: 100%;
-    }
+
+#body {
+    width: 100%;
 }
+
+.my-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    padding: 5px;
+    box-sizing: border-box; 
+}
+
+.my-container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 /* Scalable Container
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -126,6 +141,11 @@ body {
     float: left;
 }
 
+.label {
+    line-height: 36px;
+    /* border: 1px solid gray; */
+}
+
 
 /* left-column
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -202,10 +222,12 @@ body {
     border-style: dashed;
     border-radius: 5px;
     text-align: center;
+    margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: white;
     box-sizing: border-box;
+    width: 95%;
   }
 
 /* Slider

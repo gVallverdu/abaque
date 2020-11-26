@@ -33,10 +33,19 @@ server = app.server
 
 def mySlider(name, **kwargs):
     return html.Div(
-        className="slider_bloc",
+        className="my-container slider_bloc",
         children=[
-            html.P(name, className="slider_name"),
-            html.Div(dcc.Slider(**kwargs), className="slider")
+            html.P(name, className="three columns slider_name"),
+            html.Div(dcc.Slider(**kwargs), className="nine columns slider")
+        ]
+    )
+
+def myDropdown(name, **kwargs):
+    return html.Div(
+        className="my-container dropdown_bloc",
+        children=[
+            html.P(name, className="three columns label"),
+            html.Div(dcc.Dropdown(**kwargs), className="nine columns")
         ]
     )
 
@@ -60,7 +69,7 @@ header = html.Div(className="head", children=[
 
 # --- Footer ---
 footer = html.Div(className="foot", children=[
-    html.Div(className="container scalable", children=[
+    html.Div(className="my-container scalable", children=[
         html.Div(className="about", children=[
             html.H5("About:"),
             html.P([
@@ -85,7 +94,7 @@ footer = html.Div(className="foot", children=[
 # --- Body ---
 body = html.Div(
     id="body",
-    className="container scalable", 
+    className="my-container scalable", 
     children=[
         html.Div(
             id="app-container",
@@ -95,8 +104,8 @@ body = html.Div(
                     children=[
 
                         # --- select a data set
-                        html.P("Select Dataset:"),
-                        dcc.Dropdown(
+                        myDropdown(
+                            name="Select Dataset:",
                             id="dropdown-dataset",
                             options=[{"label": "miel", "value": "data/miel.csv"},
                                      {"label": "rhum", "value": "data/rhum.csv"}],
@@ -112,6 +121,17 @@ body = html.Div(
                             ),
                         ),
 
+                        # --- data selection
+                        myDropdown(
+                            name="abscissa",
+                            id="data-abscissa",
+                        ),
+
+                        myDropdown(
+                            name="ordinate",
+                            id="data-odinate",
+                        ),
+
                         # --- fit parameters
                         mySlider(
                             name="kx",
@@ -125,6 +145,13 @@ body = html.Div(
                             id="y-slider",
                             min=0, max=5, step=1, value=1,
                             marks={i: {"label": str(i)} for i in range(6)},
+                        ),
+
+                        mySlider(
+                            name="grid size",
+                            id="grid-size-slider",
+                            min=1, max=100, step=5, value=25,
+                            marks={i: {"label": str(i)} for i in range(0, 110, 20)},
                         ),
                     ]
                 ),
